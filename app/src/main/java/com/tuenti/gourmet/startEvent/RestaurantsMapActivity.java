@@ -1,6 +1,7 @@
 package com.tuenti.gourmet.startEvent;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -80,6 +81,7 @@ public class RestaurantsMapActivity extends FragmentActivity implements OnMapRea
 
 	@Override
 	public void onDataChange(List<Restaurant> restaurants) {
+		map.clear();
 		for(Restaurant restaurant : restaurants) {
 			Marker marker = createMarkerForRestaurant(restaurant);
 			markerToRestaurant.put(marker, restaurant);
