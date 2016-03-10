@@ -6,7 +6,6 @@ import java.util.Map;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -19,7 +18,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.tuenti.gourmet.R;
-import com.tuenti.gourmet.startEvent.Domain.Restaurant;
+import com.tuenti.gourmet.models.Restaurant;
+import com.tuenti.gourmet.startEvent.Domain.RestaurantParcelable;
 import com.tuenti.gourmet.startEvent.Repository.RestaurantPresenter;
 
 public class RestaurantsMapActivity extends FragmentActivity implements OnMapReadyCallback, RestaurantPresenter
@@ -86,16 +86,27 @@ public class RestaurantsMapActivity extends FragmentActivity implements OnMapRea
 	}
 
 	private Marker createMarkerForRestaurant(Restaurant restaurant) {
-		LatLng position = new LatLng(restaurant.lat, restaurant.lon);
-		MarkerOptions markerOptions = new MarkerOptions().position(position).title(restaurant.name);
+		LatLng position = new LatLng(restaurant.getLat(), restaurant.getLon());
+		MarkerOptions markerOptions = new MarkerOptions().position(position).title(restaurant.getName());
 		markerOptions.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_restaurant_marker));
 		return map.addMarker(markerOptions);
 	}
 
 	@Override
 	public boolean onMarkerClick(final Marker marker) {
-		Toast.makeText(this, "click", Toast.LENGTH_LONG).show();
-		return true;
+
+		Restaurant restaurant = markerToRestaurant.get(marker);
+
+		if (restaurant != null) {
+
+			RestaurantParcelable restaurantParcelable = new RestaurantParcelable(restaurant);
+
+			ViewRestaurantDialogFragment viewRestaurantDialogFragment = ViewRestaurantDialogFragment.newInstance(restaurantParcelable);
+			viewRestaurantDialogFragment.show(getSupportFragmentManager(), "ViewRestaurantDialogFragment");
+
+			return true;
+		}
+		return false;
 	}
 
 }

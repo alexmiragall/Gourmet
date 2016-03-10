@@ -3,7 +3,6 @@ package com.tuenti.gourmet.repositories;
 import java.util.List;
 
 import com.tuenti.gourmet.models.Event;
-import com.tuenti.gourmet.models.Restaurant;
 
 public class EventRepository {
 	/**
@@ -17,8 +16,8 @@ public class EventRepository {
 	public void init(Callback eventListener) {
 		this.callback = eventListener;
 
-		Restaurant restaurant = new Restaurant("Taj", )
-		Event event = new Event()
+//		Restaurant restaurant = new Restaurant("Taj", )
+//		Event event = new Event()
 	}
 
 
