@@ -3,6 +3,7 @@ package com.tuenti.gourmet;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -25,12 +26,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.common.api.ResultCallback;
+import com.tuenti.gourmet.models.User;
+import com.tuenti.gourmet.repositories.UserRepository;
 import com.tuenti.gourmet.startEvent.RestaurantsMapActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -145,8 +149,7 @@ public class MainActivity extends AppCompatActivity {
 			@Override
 			public void onResult(GoogleSignInResult googleSignInResult) {
 				if (googleSignInResult.isSuccess()) {
-					hideSplash();
-					Toast.makeText(MainActivity.this, "Logged in!", Toast.LENGTH_SHORT).show();
+					handleSignInResult(googleSignInResult);
 				} else {
 					showSignInDialog();
 				}
@@ -173,7 +176,10 @@ public class MainActivity extends AppCompatActivity {
 		if (result.isSuccess()) {
 			// Signed in successfully, show authenticated UI.
 			hideSplash();
-			Toast.makeText(this, "Logged in for the first time!", Toast.LENGTH_SHORT).show();
+			GoogleSignInAccount signInAccount = result.getSignInAccount();
+			Uri photoUrl = signInAccount.getPhotoUrl();
+			UserRepository.getInstance().setCurrentUser(
+					new User(signInAccount.getDisplayName(), photoUrl != null ? photoUrl.toString() : null));
 		} else {
 			finish();
 		}
