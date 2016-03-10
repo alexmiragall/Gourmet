@@ -10,6 +10,10 @@ public class Restaurant {
 	private double lon;
 	private String photo;
 
+	public Restaurant() {
+
+	}
+
 	public Restaurant(String name, String address, double lat, double lon, String photo) {
 		this.name = name;
 		this.address = address;

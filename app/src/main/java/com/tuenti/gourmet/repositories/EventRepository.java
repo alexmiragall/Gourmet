@@ -15,9 +15,6 @@ public class EventRepository {
 	private Callback callback;
 	public void init(Callback eventListener) {
 		this.callback = eventListener;
-
-//		Restaurant restaurant = new Restaurant("Taj", )
-//		Event event = new Event()
 	}
 
 

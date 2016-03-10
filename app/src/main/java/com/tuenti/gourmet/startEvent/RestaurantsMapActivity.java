@@ -7,6 +7,7 @@ import java.util.Map;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
@@ -15,15 +16,16 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.tuenti.gourmet.R;
 import com.tuenti.gourmet.models.Restaurant;
-import com.tuenti.gourmet.startEvent.Domain.RestaurantParcelable;
-import com.tuenti.gourmet.startEvent.Repository.RestaurantPresenter;
+import com.tuenti.gourmet.repositories.RestaurantRepository;
+import com.tuenti.gourmet.startEvent.Presenter.RestaurantPresenter;
 
-public class RestaurantsMapActivity extends FragmentActivity implements OnMapReadyCallback, RestaurantPresenter
-		.RestaurantCallback, OnMarkerClickListener {
+public class RestaurantsMapActivity extends FragmentActivity implements OnMapReadyCallback, RestaurantRepository
+		.GetRestaurantCallback, OnMarkerClickListener {
 
 	private GoogleMap map;
 
@@ -83,6 +85,7 @@ public class RestaurantsMapActivity extends FragmentActivity implements OnMapRea
 			Marker marker = createMarkerForRestaurant(restaurant);
 			markerToRestaurant.put(marker, restaurant);
 		}
+		map.animateCamera(CameraUpdateFactory.newLatLngZoom(TUENTI_POSITION, 15.f));
 	}
 
 	private Marker createMarkerForRestaurant(Restaurant restaurant) {
