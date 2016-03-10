@@ -31,6 +31,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.common.api.ResultCallback;
+import com.tuenti.gourmet.startEvent.RestaurantsMapActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -109,6 +110,8 @@ public class MainActivity extends AppCompatActivity {
 
 		//noinspection SimplifiableIfStatement
 		if (id == R.id.action_settings) {
+			Intent newActivity = new Intent(this, RestaurantsMapActivity.class);
+			startActivity(newActivity);
 			return true;
 		}
 

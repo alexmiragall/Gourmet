@@ -10,7 +10,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
@@ -25,7 +24,10 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Picasso.LoadedFrom;
 import com.squareup.picasso.Target;
 import com.tuenti.gourmet.R;
-import com.tuenti.gourmet.startEvent.Domain.RestaurantParcelable;
+import com.tuenti.gourmet.models.Event;
+import com.tuenti.gourmet.models.Restaurant;
+import com.tuenti.gourmet.models.User;
+import com.tuenti.gourmet.repositories.EventRepository;
 
 public class RestaurantActivity extends AppCompatActivity {
 
@@ -70,8 +72,10 @@ public class RestaurantActivity extends AppCompatActivity {
 		floatingActionButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-						.setAction("Action", null).show();
+				User owner = new User("José Miguel Brocal", "http://www.google.es");
+				Event event = new Event(restaurantParcelable, 0L, owner, "Esto es un comentario");
+
+				EventRepository.getInstance().add(event);
 			}
 		});
 

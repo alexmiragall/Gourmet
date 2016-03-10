@@ -25,12 +25,11 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.tuenti.gourmet.R;
 import com.tuenti.gourmet.models.Restaurant;
-import com.tuenti.gourmet.repositories.RestaurantRepository;
-import com.tuenti.gourmet.startEvent.Domain.RestaurantParcelable;
+import com.tuenti.gourmet.repositories.Repository;
 import com.tuenti.gourmet.startEvent.Presenter.RestaurantPresenter;
 
-public class RestaurantsMapActivity extends FragmentActivity implements OnMapReadyCallback, RestaurantRepository
-		.GetRestaurantCallback, OnMarkerClickListener {
+public class RestaurantsMapActivity extends FragmentActivity implements OnMapReadyCallback,
+		Repository.Callback<Restaurant>, OnMarkerClickListener {
 
 	@Bind(R.id.main_content)
 	CoordinatorLayout coordinatorLayout;

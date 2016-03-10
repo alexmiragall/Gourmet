@@ -45,6 +45,18 @@ public class EventsFragment extends Fragment implements EventListPresenter.View 
 	}
 
 	@Override
+	public void onResume() {
+		super.onResume();
+		presenter.onResume();
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		presenter.onPause();
+	}
+
+	@Override
 	public void onEventsChanged(List<Event> events) {
 		if (eventsAdapter == null)  {
 			eventsAdapter = new EventsAdapter(getActivity(), events);
