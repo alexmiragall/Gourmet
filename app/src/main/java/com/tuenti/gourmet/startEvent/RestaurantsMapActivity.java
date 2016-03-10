@@ -1,14 +1,13 @@
 package com.tuenti.gourmet.startEvent;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
@@ -17,12 +16,12 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.tuenti.gourmet.R;
 import com.tuenti.gourmet.models.Restaurant;
 import com.tuenti.gourmet.repositories.RestaurantRepository;
+import com.tuenti.gourmet.startEvent.Domain.RestaurantParcelable;
 import com.tuenti.gourmet.startEvent.Presenter.RestaurantPresenter;
 
 public class RestaurantsMapActivity extends FragmentActivity implements OnMapReadyCallback, RestaurantRepository
@@ -82,6 +81,7 @@ public class RestaurantsMapActivity extends FragmentActivity implements OnMapRea
 
 	@Override
 	public void onDataChange(List<Restaurant> restaurants) {
+		map.clear();
 		for(Restaurant restaurant : restaurants) {
 			Marker marker = createMarkerForRestaurant(restaurant);
 			markerToRestaurant.put(marker, restaurant);
@@ -98,8 +98,19 @@ public class RestaurantsMapActivity extends FragmentActivity implements OnMapRea
 
 	@Override
 	public boolean onMarkerClick(final Marker marker) {
-		Toast.makeText(this, "click", Toast.LENGTH_LONG).show();
-		return true;
+
+		Restaurant restaurant = markerToRestaurant.get(marker);
+
+		if (restaurant != null) {
+
+			RestaurantParcelable restaurantParcelable = new RestaurantParcelable(restaurant);
+
+			ViewRestaurantDialogFragment viewRestaurantDialogFragment = ViewRestaurantDialogFragment.newInstance(restaurantParcelable);
+			viewRestaurantDialogFragment.show(getSupportFragmentManager(), "ViewRestaurantDialogFragment");
+
+			return true;
+		}
+		return false;
 	}
 
 }
