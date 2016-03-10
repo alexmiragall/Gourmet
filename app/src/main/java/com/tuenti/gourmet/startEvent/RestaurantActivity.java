@@ -75,7 +75,7 @@ public class RestaurantActivity extends AppCompatActivity {
 				User owner = new User("José Miguel Brocal", "http://www.google.es");
 				Event event = new Event(restaurant, 0L, owner, "Esto es un comentario");
 
-				EventRepository.getInstance().add(event);
+				EventRepository.getInstance().post(event);
 			}
 		});
 
