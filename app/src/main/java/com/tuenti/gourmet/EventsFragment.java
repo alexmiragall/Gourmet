@@ -1,6 +1,5 @@
 package com.tuenti.gourmet;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;

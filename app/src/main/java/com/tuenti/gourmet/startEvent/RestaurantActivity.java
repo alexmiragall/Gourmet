@@ -49,7 +49,7 @@ public class RestaurantActivity extends AppCompatActivity {
 	CollapsingToolbarLayout collapsingToolbarLayout;
 
 
-	private RestaurantParcelable restaurantParcelable;
+	private Restaurant restaurant;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,21 +59,21 @@ public class RestaurantActivity extends AppCompatActivity {
 		setSupportActionBar(toolbar);
 
 		Intent intent = getIntent();
-		restaurantParcelable = intent.getParcelableExtra(PARCELABLE_KEY);
+		restaurant = intent.getParcelableExtra(PARCELABLE_KEY);
 
 
-		if (!TextUtils.isEmpty(restaurantParcelable.getPhoto())) {
-			setImage(restaurantParcelable.getPhoto());
+		if (!TextUtils.isEmpty(restaurant.getPhoto())) {
+			setImage(restaurant.getPhoto());
 
 		}
 
-		setTitle(restaurantParcelable.getName());
+		setTitle(restaurant.getName());
 
 		floatingActionButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				User owner = new User("José Miguel Brocal", "http://www.google.es");
-				Event event = new Event(restaurantParcelable, 0L, owner, "Esto es un comentario");
+				Event event = new Event(restaurant, 0L, owner, "Esto es un comentario");
 
 				EventRepository.getInstance().add(event);
 			}

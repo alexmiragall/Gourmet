@@ -111,18 +111,15 @@ public class RestaurantsMapActivity extends FragmentActivity implements OnMapRea
 		Restaurant restaurant = markerToRestaurant.get(marker);
 
 		if (restaurant != null) {
-
-			RestaurantParcelable restaurantParcelable = new RestaurantParcelable(restaurant);
-			showRestaurantDialog(restaurantParcelable);
+			showRestaurantDialog(restaurant);
 
 		}
 		return false;
 	}
 
-	public void showRestaurantDialog(final RestaurantParcelable restaurant) {
-
+	public void showRestaurantDialog(final Restaurant restaurant) {
 		Snackbar snackbar = Snackbar
-				.make(coordinatorLayout, "Message is deleted", Snackbar.LENGTH_LONG)
+				.make(coordinatorLayout, restaurant.getName(), Snackbar.LENGTH_LONG)
 				.setAction(getString(R.string.view), new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
