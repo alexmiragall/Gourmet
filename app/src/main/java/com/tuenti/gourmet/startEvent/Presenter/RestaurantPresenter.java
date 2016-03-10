@@ -11,6 +11,5 @@ public class RestaurantPresenter {
 
 	public void initializer(final Repository.Callback<Restaurant> callback) {
 		RestaurantRepository.getInstance().subscribe(callback);
-		callback.onDataChange(RestaurantRepository.getInstance().getItems()); /* Send existing items */
 	}
 }

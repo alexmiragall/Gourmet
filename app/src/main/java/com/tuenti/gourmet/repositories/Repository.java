@@ -40,6 +40,8 @@ public abstract class Repository<T> {
 		synchronized (callbacks) {
 			callbacks.add(listener);
 		}
+		/* Notify about current state to the just subscribed listener */
+		listener.onDataChange(items);
 	}
 
 	public void unsubscribe(Callback<T> listener) {
