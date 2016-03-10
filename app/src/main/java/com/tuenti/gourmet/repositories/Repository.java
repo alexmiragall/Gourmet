@@ -7,6 +7,7 @@ import java.util.Set;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
+import com.firebase.client.Firebase.CompletionListener;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
@@ -50,8 +51,17 @@ public abstract class Repository<T> {
 		}
 	}
 
-	public void add(T object) {
-		firebase.push().setValue(object);
+	public void post(T item) {
+		firebase.push().setValue(item);
+	}
+
+	public void post(T item, final PostCallback postCallback) {
+		firebase.push().setValue(item, new CompletionListener() {
+			@Override
+			public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+				postCallback.onItemPosted();
+			}
+		});
 	}
 
 	public List<T> getItems() {
@@ -68,5 +78,9 @@ public abstract class Repository<T> {
 
 	public interface Callback<T> {
 		void onDataChange(List<T> items);
+	}
+
+	public interface PostCallback {
+		void onItemPosted();
 	}
 }
