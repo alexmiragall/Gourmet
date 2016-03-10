@@ -95,4 +95,5 @@
 		"when a user tries to pick up one of cards.\n\n"
 	</string>
 	<string name="view">View</string>
+	<string name="view_details">View details</string>
 </resources>

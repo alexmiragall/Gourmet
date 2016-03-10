@@ -1,12 +1,14 @@
 package com.tuenti.gourmet.startEvent;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AlertDialog;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -104,13 +106,36 @@ public class RestaurantsMapActivity extends FragmentActivity implements OnMapRea
 		if (restaurant != null) {
 
 			RestaurantParcelable restaurantParcelable = new RestaurantParcelable(restaurant);
+			showRestaurantDialog(restaurantParcelable);
 
-			ViewRestaurantDialogFragment viewRestaurantDialogFragment = ViewRestaurantDialogFragment.newInstance(restaurantParcelable);
-			viewRestaurantDialogFragment.show(getSupportFragmentManager(), "ViewRestaurantDialogFragment");
-
-			return true;
 		}
 		return false;
+	}
+
+	public void showRestaurantDialog(final RestaurantParcelable restaurant) {
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
+		// set title
+		alertDialogBuilder.setTitle(restaurant.getName());
+
+		// set dialog message
+		alertDialogBuilder
+				.setMessage(restaurant.getAddress())
+				.setCancelable(false)
+				.setPositiveButton(getString(R.string.view), new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						Intent intent = new Intent(RestaurantsMapActivity.this, RestaurantActivity.class);
+						intent.putExtra(RestaurantActivity.PARCELABLE_KEY, restaurant);
+						startActivity(intent);
+						dialog.dismiss();
+
+					}
+				});
+		// create alert dialog
+		AlertDialog alertDialog = alertDialogBuilder.create();
+
+		// show it
+		alertDialog.show();
 	}
 
 }
