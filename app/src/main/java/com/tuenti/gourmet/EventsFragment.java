@@ -24,7 +24,7 @@ import com.tuenti.gourmet.repositories.EventListPresenter;
 public class EventsFragment extends Fragment implements EventListPresenter.View {
 
 	@Bind(R.id.events_recycler)
-	RecyclerView recyclerView;
+	protected RecyclerView recyclerView;
 
 	private EventListPresenter presenter;
 	private EventsAdapter eventsAdapter;

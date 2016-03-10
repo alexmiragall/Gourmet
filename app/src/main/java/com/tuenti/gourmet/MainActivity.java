@@ -1,6 +1,9 @@
 package com.tuenti.gourmet;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import android.content.Intent;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,8 +22,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
+import com.google.android.gms.common.api.ResultCallback;
 
 public class MainActivity extends AppCompatActivity {
+
+	private static final int RESULT_CODE_SIGN_IN = 1;
 
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -37,10 +51,22 @@ public class MainActivity extends AppCompatActivity {
 	 */
 	private ViewPager mViewPager;
 
+	@Bind(R.id.main_content)
+	CoordinatorLayout mainContent;
+
+	@Bind(R.id.splash)
+	View splash;
+
+	private GoogleApiClient googleApiClient;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		ButterKnife.bind(this);
+		showSplash();
+
+		initAuth();
 
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
@@ -59,10 +85,8 @@ public class MainActivity extends AppCompatActivity {
 		fab.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Intent intentToLogin = new Intent(MainActivity.this, LoginActivity.class);
-				startActivity(intentToLogin);
-//				Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//						.setAction("Action", null).show();
+				Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+						.setAction("Action", null).show();
 			}
 		});
 
@@ -89,6 +113,77 @@ public class MainActivity extends AppCompatActivity {
 		}
 
 		return super.onOptionsItemSelected(item);
+	}
+
+	private void initAuth() {
+		// Configure sign-in to request the user's ID, email address, and basic
+		// profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+				.requestEmail()
+				.build();
+
+		// Build a GoogleApiClient with access to the Google Sign-In API and the
+		// options specified by gso.
+		googleApiClient = new GoogleApiClient.Builder(this)
+				.enableAutoManage(this, new OnConnectionFailedListener() {
+					@Override
+					public void onConnectionFailed(ConnectionResult connectionResult) {
+						finish();
+					}
+				})
+				.addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+				.build();
+
+		signInSilently();
+	}
+
+	private void signInSilently() {
+		Auth.GoogleSignInApi.silentSignIn(googleApiClient).setResultCallback(new ResultCallback<GoogleSignInResult>() {
+			@Override
+			public void onResult(GoogleSignInResult googleSignInResult) {
+				if (googleSignInResult.isSuccess()) {
+					hideSplash();
+					Toast.makeText(MainActivity.this, "Logged in!", Toast.LENGTH_SHORT).show();
+				} else {
+					showSignInDialog();
+				}
+			}
+		});
+	}
+
+	private void showSignInDialog() {
+		Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
+		startActivityForResult(signInIntent, RESULT_CODE_SIGN_IN);
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		// Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+		if (requestCode == RESULT_CODE_SIGN_IN) {
+			GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+			handleSignInResult(result);
+		}
+	}
+
+	private void handleSignInResult(GoogleSignInResult result) {
+		if (result.isSuccess()) {
+			// Signed in successfully, show authenticated UI.
+			hideSplash();
+			Toast.makeText(this, "Logged in for the first time!", Toast.LENGTH_SHORT).show();
+		} else {
+			finish();
+		}
+	}
+
+	private void hideSplash() {
+		splash.setVisibility(View.GONE);
+		mainContent.setVisibility(View.VISIBLE);
+	}
+
+	private void showSplash() {
+		splash.setVisibility(View.VISIBLE);
+		mainContent.setVisibility(View.GONE);
 	}
 
 	/**

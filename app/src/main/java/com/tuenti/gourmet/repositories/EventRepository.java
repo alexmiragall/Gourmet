@@ -1,0 +1,22 @@
+package com.tuenti.gourmet.repositories;
+
+import java.util.List;
+
+import com.tuenti.gourmet.models.Event;
+import com.tuenti.gourmet.models.Restaurant;
+
+public class EventRepository {
+	/**
+	 * Copyright (c) Tuenti Technologies. All rights reserved.
+	 */
+	public interface Callback {
+		void onEventsChanged(List<Event> events);
+	}
+
+	private Callback callback;
+	public void init(Callback eventListener) {
+		this.callback = eventListener;
+	}
+
+
+}
