@@ -5,24 +5,18 @@ package com.tuenti.gourmet.models;
  */
 public class User {
 	private String name;
-	private String username;
-	private String photo;
+	private String photoUrl;
 
-	public User(String name, String username, String photo) {
+	public User(String name, String photoUrl) {
 		this.name = name;
-		this.username = username;
-		this.photo = photo;
+		this.photoUrl = photoUrl;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
-	public String getPhoto() {
-		return photo;
+	public String getPhotoUrl() {
+		return photoUrl;
 	}
 }

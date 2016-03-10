@@ -23,7 +23,7 @@ public class EventListPresenter {
 	public void init(View view) {
 		this.view = view;
 
-		User user = new User("Pepe", "pepe", "");
+		User user = new User("Pepe", "pepe");
 		Restaurant restaurant = new Restaurant("Taj", "Calle", 2.0, 3.0, "");
 		Event event = new Event(restaurant, new Date(), user, "Comentario");
 		events.add(event);
