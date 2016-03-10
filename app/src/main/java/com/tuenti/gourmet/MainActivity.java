@@ -33,6 +33,8 @@ import com.tuenti.gourmet.models.User;
 import com.tuenti.gourmet.repositories.UserRepository;
 import com.tuenti.gourmet.startEvent.RestaurantsMapActivity;
 
+import org.w3c.dom.Text;
+
 public class MainActivity extends AppCompatActivity {
 
 	private static final int RESULT_CODE_SIGN_IN = 1;
@@ -57,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
 
 	@Bind(R.id.splash)
 	View splash;
+
+	@Bind(R.id.splash_title)
+	TextView splashTitle;
 
 	private GoogleApiClient googleApiClient;
 
@@ -187,6 +192,7 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	private void showSplash() {
+//		splashTitle.setTypeface();
 		splash.setVisibility(View.VISIBLE);
 		mainContent.setVisibility(View.GONE);
 	}

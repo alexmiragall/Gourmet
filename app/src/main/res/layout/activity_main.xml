@@ -17,12 +17,14 @@
 				  android:text=".Gourmet"
 				  android:textColor="@android:color/black"
 				  android:textSize="72sp"
-				  android:textStyle="bold"/>
+				  android:textStyle="bold"
+			      android:id="@+id/splash_title"/>
 
 		<ImageView android:layout_width="wrap_content"
 				   android:layout_height="wrap_content"
 				   android:layout_gravity="center"
-				   android:src="@drawable/splash"/>
+				   android:src="@drawable/splash"
+			android:visibility="gone"/>
 
 	</LinearLayout>
 	<android.support.design.widget.CoordinatorLayout
