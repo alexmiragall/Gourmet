@@ -7,12 +7,15 @@ import java.util.List;
 /**
  * Copyright (c) Tuenti Technologies. All rights reserved.
  */
-public class Event implements Serializable {
+public class Event {
 	private Restaurant restaurant;
 	private Date date;
 	private User owner;
 	private String comment;
 	private List<User> occupants;
+
+	public Event() {
+	}
 
 	public Event(Restaurant restaurant, Date date, User owner, String comment) {
 		this.restaurant = restaurant;
