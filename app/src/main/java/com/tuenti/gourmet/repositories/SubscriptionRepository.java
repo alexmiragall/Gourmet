@@ -35,6 +35,14 @@ public class SubscriptionRepository {
 				.apply();
 	}
 
+
+	public void remove(String restaurantName) {
+		subscriptions.remove(restaurantName);
+		preferences.edit()
+				.putStringSet(SUBSCRIPTIONS_ARRAY_PREFERENCE, subscriptions)
+				.apply();
+	}
+
 	public boolean isSubscribedTo(String restaurantName) {
 		return subscriptions.contains(restaurantName);
 	}
