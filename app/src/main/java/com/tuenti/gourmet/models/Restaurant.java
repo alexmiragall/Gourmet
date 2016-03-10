@@ -14,17 +14,24 @@ public class Restaurant implements Parcelable {
 	private double lat;
 	private double lon;
 	private String photo;
+	private String description;
 
 	public Restaurant() {
 
 	}
 
-	public Restaurant(String name, String address, double lat, double lon, String photo) {
+	public Restaurant(String name,
+			String address,
+			double lat,
+			double lon,
+			String photo,
+			String comment) {
 		this.name = name;
 		this.address = address;
 		this.lat = lat;
 		this.lon = lon;
 		this.photo = photo;
+		this.description = description;
 	}
 
 	public String getName() {
@@ -59,6 +66,7 @@ public class Restaurant implements Parcelable {
 		dest.writeDouble(lat);
 		dest.writeDouble(lon);
 		dest.writeString(photo);
+		dest.writeString(description);
 	}
 
 
@@ -68,6 +76,7 @@ public class Restaurant implements Parcelable {
 		this.lat = source.readDouble();
 		this.lon = source.readDouble();
 		this.photo = source.readString();
+		this.description = source.readString();
 	}
 
 	public String getAddress() {
@@ -84,6 +93,10 @@ public class Restaurant implements Parcelable {
 
 	public String getPhoto() {
 		return photo;
+	}
+
+	public String getDescription() {
+		return description;
 	}
 
 
