@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_id": "gourmet-1246",
+    "project_number": "430029866386",
+    "name": "Gourmet"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:430029866386:android:838d30835129704a",
+        "client_id": "android:com.tuenti.gourmet",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "com.tuenti.gourmet",
+          "certificate_hash": []
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "430029866386-v6nmagr2jem55hqgd7jr0vd7ue8qqksf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tuenti.gourmet",
+            "certificate_hash": "C2BAD1D32213AAD3E197B342B83F069C3DA8664A"
+          }
+        },
+        {
+          "client_id": "430029866386-iasaqamc08s46u2kfdk8g1573p54qdd7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 1,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 2
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}
