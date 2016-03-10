@@ -3,7 +3,6 @@ package com.tuenti.gourmet.startEvent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -13,8 +12,6 @@ import com.tuenti.gourmet.models.Event;
 import com.tuenti.gourmet.models.Restaurant;
 import com.tuenti.gourmet.models.User;
 import com.tuenti.gourmet.repositories.EventRepository;
-import com.tuenti.gourmet.repositories.EventRepository.CreateNewEventCallback;
-import com.tuenti.gourmet.startEvent.Domain.RestaurantParcelable;
 
 public class RestaurantActivity extends AppCompatActivity {
 
@@ -36,15 +33,10 @@ public class RestaurantActivity extends AppCompatActivity {
 		fab.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				User owner = new User("José Miguel Brocal", "jmbrocal", "http://www.google.es");
+				User owner = new User("José Miguel Brocal", "http://www.google.es");
 				Event event = new Event(restaurantParcelable, 0L, owner, "Esto es un comentario");
 
-				new EventRepository().createEvent(event, new CreateNewEventCallback() {
-					@Override
-					public void onEventCreated() {
-						RestaurantActivity.this.finish();
-					}
-				});
+				EventRepository.getInstance().add(event);
 			}
 		});
 	}

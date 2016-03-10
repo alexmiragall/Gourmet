@@ -18,7 +18,6 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.tuenti.gourmet.R;
 import com.tuenti.gourmet.models.Restaurant;
-import com.tuenti.gourmet.startEvent.Domain.RestaurantParcelable;
 
 /**
  * Created by gmerino on 10/03/16.

@@ -50,6 +50,10 @@ public abstract class Repository<T> {
 		}
 	}
 
+	public void add(T object) {
+		firebase.push().setValue(object);
+	}
+
 	public List<T> getItems() {
 		return new ArrayList<>(items);
 	}

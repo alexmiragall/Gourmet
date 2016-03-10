@@ -41,12 +41,13 @@ public class EventsFragment extends Fragment implements EventListPresenter.View 
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		presenter = new EventListPresenter();
+		presenter.init(this);
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		presenter.init(this);
+		presenter.onResume();
 	}
 
 	@Override

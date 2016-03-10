@@ -1,7 +1,6 @@
 package com.tuenti.gourmet.startEvent;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,8 +20,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.tuenti.gourmet.R;
 import com.tuenti.gourmet.models.Restaurant;
 import com.tuenti.gourmet.repositories.Repository;
-import com.tuenti.gourmet.repositories.RestaurantRepository;
-import com.tuenti.gourmet.startEvent.Domain.RestaurantParcelable;
 import com.tuenti.gourmet.startEvent.Presenter.RestaurantPresenter;
 
 public class RestaurantsMapActivity extends FragmentActivity implements OnMapReadyCallback,
@@ -103,8 +100,6 @@ public class RestaurantsMapActivity extends FragmentActivity implements OnMapRea
 		Restaurant restaurant = markerToRestaurant.get(marker);
 
 		if (restaurant != null) {
-
-			RestaurantParcelable restaurantParcelable = new RestaurantParcelable(restaurant);
 
 			ViewRestaurantDialogFragment viewRestaurantDialogFragment = ViewRestaurantDialogFragment.newInstance(restaurant);
 			viewRestaurantDialogFragment.show(getSupportFragmentManager(), "ViewRestaurantDialogFragment");
