@@ -23,7 +23,7 @@ import com.tuenti.gourmet.models.Event;
 public class EventsFragment extends Fragment {
 
 	@Bind(R.id.events_recycler)
-	private RecyclerView recyclerView;
+	protected RecyclerView recyclerView;
 
 	private EventsAdapter eventsAdapter;
 
