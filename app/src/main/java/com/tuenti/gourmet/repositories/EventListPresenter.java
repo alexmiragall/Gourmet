@@ -11,26 +11,44 @@ import com.tuenti.gourmet.models.User;
 /**
  * Copyright (c) Tuenti Technologies. All rights reserved.
  */
-public class EventListPresenter {
+public class EventListPresenter implements EventRepository.GetAllEventsCallback {
 
 	private View view;
 	private List<Event> events = new ArrayList<>();
+	private EventRepository eventRepository;
 
 	public interface View {
 		void onEventsChanged(List<Event> events);
 	}
 
+	public EventListPresenter() {
+		eventRepository = new EventRepository();
+	}
+
 	public void init(View view) {
 		this.view = view;
+		eventRepository.getAllEvents(this);
+	}
 
-		User user = new User("Pepe", "pepe", "");
-		Restaurant restaurant = new Restaurant("Taj", "Calle", 2.0, 3.0, "");
-		Event event = new Event(restaurant, new Date(), user, "Comentario");
-		events.add(event);
-		events.add(event);
+	public void onPause() {
+		eventRepository.onSubscribObserver();
+	}
+
+	@Override
+	public void onEventCreated(Event event) {
 		events.add(event);
 		view.onEventsChanged(events);
 	}
 
+	@Override
+	public void onEventChanged(Event event) {
+
+	}
+
+	@Override
+	public void onEventDeleted(Event event) {
+		events.remove(event);
+		view.onEventsChanged(events);
+	}
 
 }

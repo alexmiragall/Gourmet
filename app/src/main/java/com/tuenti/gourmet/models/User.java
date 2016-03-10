@@ -8,6 +8,9 @@ public class User {
 	private String username;
 	private String photo;
 
+	public User() {
+	}
+
 	public User(String name, String username, String photo) {
 		this.name = name;
 		this.username = username;

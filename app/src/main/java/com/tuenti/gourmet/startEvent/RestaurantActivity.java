@@ -9,13 +9,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.tuenti.gourmet.R;
+import com.tuenti.gourmet.models.Event;
+import com.tuenti.gourmet.models.Restaurant;
+import com.tuenti.gourmet.models.User;
+import com.tuenti.gourmet.repositories.EventRepository;
+import com.tuenti.gourmet.repositories.EventRepository.CreateNewEventCallback;
 import com.tuenti.gourmet.startEvent.Domain.RestaurantParcelable;
 
 public class RestaurantActivity extends AppCompatActivity {
 
 	public static final String PARCELABLE_KEY = "restaurant";
 
-	private RestaurantParcelable restaurantParcelable;
+	private Restaurant restaurantParcelable;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +36,17 @@ public class RestaurantActivity extends AppCompatActivity {
 		fab.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-						.setAction("Action", null).show();
+				User owner = new User("José Miguel Brocal", "jmbrocal", "http://www.google.es");
+				Event event = new Event(restaurantParcelable, 0L, owner, "Esto es un comentario");
+
+				new EventRepository().createEvent(event, new CreateNewEventCallback() {
+					@Override
+					public void onEventCreated() {
+						RestaurantActivity.this.finish();
+					}
+				});
 			}
 		});
-
-
 	}
 
 }

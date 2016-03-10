@@ -105,7 +105,7 @@ public class RestaurantsMapActivity extends FragmentActivity implements OnMapRea
 
 			RestaurantParcelable restaurantParcelable = new RestaurantParcelable(restaurant);
 
-			ViewRestaurantDialogFragment viewRestaurantDialogFragment = ViewRestaurantDialogFragment.newInstance(restaurantParcelable);
+			ViewRestaurantDialogFragment viewRestaurantDialogFragment = ViewRestaurantDialogFragment.newInstance(restaurant);
 			viewRestaurantDialogFragment.show(getSupportFragmentManager(), "ViewRestaurantDialogFragment");
 
 			return true;

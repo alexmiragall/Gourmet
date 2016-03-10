@@ -1,6 +1,7 @@
 package com.tuenti.gourmet.adapters;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import com.squareup.picasso.Picasso;
 import com.tuenti.gourmet.R;
 import com.tuenti.gourmet.models.Event;
+import com.tuenti.gourmet.repositories.EventRepository;
 
 /**
  * Copyright (c) Tuenti Technologies. All rights reserved.
@@ -23,7 +25,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventViewHolder> {
 	private final Context context;
 
 	public EventsAdapter(Context context, List<Event> events) {
-		this.events = events;
+		this.events = new ArrayList<>(events);
 		this.context = context;
 	}
 

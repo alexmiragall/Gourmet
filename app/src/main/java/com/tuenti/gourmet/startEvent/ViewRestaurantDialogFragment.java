@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.tuenti.gourmet.R;
+import com.tuenti.gourmet.models.Restaurant;
 import com.tuenti.gourmet.startEvent.Domain.RestaurantParcelable;
 
 /**
@@ -35,9 +36,9 @@ public class ViewRestaurantDialogFragment extends AppCompatDialogFragment {
 
 	private static final String PARCELABLE_KEY = "restaurant";
 
-	private RestaurantParcelable restaurant;
+	private Restaurant restaurant;
 
-	public static ViewRestaurantDialogFragment newInstance(RestaurantParcelable restaurantParcelable) {
+	public static ViewRestaurantDialogFragment newInstance(Restaurant restaurantParcelable) {
 		ViewRestaurantDialogFragment viewRestaurantDialogFragment = new ViewRestaurantDialogFragment();
 
 		Bundle arguments = new Bundle();
