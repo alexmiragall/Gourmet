@@ -16,18 +16,18 @@ import android.view.ViewGroup;
 
 import com.tuenti.gourmet.adapters.EventsAdapter;
 import com.tuenti.gourmet.models.Event;
+import com.tuenti.gourmet.repositories.EventListPresenter;
 
 /**
  * Copyright (c) Tuenti Technologies. All rights reserved.
  */
-public class EventsFragment extends Fragment {
+public class EventsFragment extends Fragment implements EventListPresenter.View {
 
 	@Bind(R.id.events_recycler)
-	private RecyclerView recyclerView;
+	RecyclerView recyclerView;
 
+	private EventListPresenter presenter;
 	private EventsAdapter eventsAdapter;
-
-	private List<Event> events = new ArrayList<>();
 
 	@Nullable
 	@Override
@@ -40,9 +40,18 @@ public class EventsFragment extends Fragment {
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		presenter = new EventListPresenter();
+		presenter.init(this);
+	}
 
-		eventsAdapter = new EventsAdapter(getActivity(), events);
-		recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-		recyclerView.setAdapter(eventsAdapter);
+	@Override
+	public void onEventsChanged(List<Event> events) {
+		if (eventsAdapter == null)  {
+			eventsAdapter = new EventsAdapter(getActivity(), events);
+			recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+			recyclerView.setAdapter(eventsAdapter);
+		} else {
+			eventsAdapter.update(events);
+		}
 	}
 }
