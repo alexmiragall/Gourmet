@@ -5,6 +5,7 @@ package com.tuenti.gourmet.startEvent.Domain;
  */
 public class Restaurant {
 
+	public String name;
 	public String address;
 	public double lon;
 	public double lat;
