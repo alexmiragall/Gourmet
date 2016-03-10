@@ -4,11 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.content.DialogInterface;
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AlertDialog;
+import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -29,6 +32,9 @@ import com.tuenti.gourmet.startEvent.Presenter.RestaurantPresenter;
 public class RestaurantsMapActivity extends FragmentActivity implements OnMapReadyCallback, RestaurantRepository
 		.GetRestaurantCallback, OnMarkerClickListener {
 
+	@Bind(R.id.main_content)
+	CoordinatorLayout coordinatorLayout;
+
 	private GoogleMap map;
 
 	private LatLng TUENTI_POSITION = new LatLng(40.4201097,-3.7030209);
@@ -40,6 +46,7 @@ public class RestaurantsMapActivity extends FragmentActivity implements OnMapRea
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_restaurants_map);
+		ButterKnife.bind(this);
 		// Obtain the SupportMapFragment and get notified when the map is ready to be used.
 		SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.map);
@@ -84,6 +91,7 @@ public class RestaurantsMapActivity extends FragmentActivity implements OnMapRea
 	@Override
 	public void onDataChange(List<Restaurant> restaurants) {
 		map.clear();
+		addTuentiMarker();
 		for(Restaurant restaurant : restaurants) {
 			Marker marker = createMarkerForRestaurant(restaurant);
 			markerToRestaurant.put(marker, restaurant);
@@ -113,29 +121,19 @@ public class RestaurantsMapActivity extends FragmentActivity implements OnMapRea
 	}
 
 	public void showRestaurantDialog(final RestaurantParcelable restaurant) {
-		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
-		// set title
-		alertDialogBuilder.setTitle(restaurant.getName());
-
-		// set dialog message
-		alertDialogBuilder
-				.setMessage(restaurant.getAddress())
-				.setCancelable(false)
-				.setPositiveButton(getString(R.string.view), new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int id) {
+		Snackbar snackbar = Snackbar
+				.make(coordinatorLayout, "Message is deleted", Snackbar.LENGTH_LONG)
+				.setAction(getString(R.string.view), new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
 						Intent intent = new Intent(RestaurantsMapActivity.this, RestaurantActivity.class);
 						intent.putExtra(RestaurantActivity.PARCELABLE_KEY, restaurant);
 						startActivity(intent);
-						dialog.dismiss();
-
 					}
 				});
-		// create alert dialog
-		AlertDialog alertDialog = alertDialogBuilder.create();
 
-		// show it
-		alertDialog.show();
+		snackbar.show();
 	}
 
 }
