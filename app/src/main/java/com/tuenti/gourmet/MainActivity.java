@@ -1,6 +1,9 @@
 package com.tuenti.gourmet;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import android.content.Intent;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -48,6 +51,11 @@ public class MainActivity extends AppCompatActivity {
 	 */
 	private ViewPager mViewPager;
 
+	@Bind(R.id.main_content)
+	CoordinatorLayout mainContent;
+
+	@Bind(R.id.splash)
+	View splash;
 
 	private GoogleApiClient googleApiClient;
 
@@ -55,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		ButterKnife.bind(this);
+		showSplash();
 
 		initAuth();
 
@@ -132,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
 			@Override
 			public void onResult(GoogleSignInResult googleSignInResult) {
 				if (googleSignInResult.isSuccess()) {
+					hideSplash();
 					Toast.makeText(MainActivity.this, "Logged in!", Toast.LENGTH_SHORT).show();
 				} else {
 					showSignInDialog();
@@ -158,10 +169,21 @@ public class MainActivity extends AppCompatActivity {
 	private void handleSignInResult(GoogleSignInResult result) {
 		if (result.isSuccess()) {
 			// Signed in successfully, show authenticated UI.
+			hideSplash();
 			Toast.makeText(this, "Logged in for the first time!", Toast.LENGTH_SHORT).show();
 		} else {
 			finish();
 		}
+	}
+
+	private void hideSplash() {
+		splash.setVisibility(View.GONE);
+		mainContent.setVisibility(View.VISIBLE);
+	}
+
+	private void showSplash() {
+		splash.setVisibility(View.VISIBLE);
+		mainContent.setVisibility(View.GONE);
 	}
 
 	/**
