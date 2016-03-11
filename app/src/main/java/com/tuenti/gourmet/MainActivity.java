@@ -5,6 +5,7 @@ import butterknife.ButterKnife;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -57,6 +58,14 @@ public class MainActivity extends AppCompatActivity {
 	View splash;
 
 	private GoogleApiClient googleApiClient;
+
+	Runnable hideSplash = new Runnable() {
+		@Override
+		public void run() {
+			hideSplash();
+		}
+	};
+	Handler handler = new Handler();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -144,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
 	private void handleSignInResult(GoogleSignInResult result) {
 		if (result.isSuccess()) {
 			// Signed in successfully, show authenticated UI.
-			hideSplash();
+			handler.postDelayed(hideSplash, 3000);
 			GoogleSignInAccount signInAccount = result.getSignInAccount();
 			Uri photoUrl = signInAccount.getPhotoUrl();
 			UserRepository.getInstance().setCurrentUser(
