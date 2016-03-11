@@ -50,10 +50,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
-        <activity
             android:name=".startEvent.RestaurantActivity"
             android:label="@string/title_activity_restaurant"
             android:theme="@style/AppTheme.NoActionBar" >
@@ -63,6 +59,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service   android:enabled="true"
+                   android:name=".service.SubscriptionService"/>
     </application>
 
 </manifest>
