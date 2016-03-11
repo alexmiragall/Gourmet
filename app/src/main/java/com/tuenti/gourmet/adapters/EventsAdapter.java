@@ -52,7 +52,9 @@ public class EventsAdapter extends RecyclerView.Adapter<EventViewHolder> {
 					(holder.imageView);
 		}
 		holder.tvTitle.setText(event.getRestaurant().getName());
-		holder.tvDate.setText(SimpleDateFormat.getDateInstance().format(event.getDate()));
+		String subtitle = "Creado por " + event.getOwner().getName();
+		SimpleDateFormat.getDateInstance().format(event.getDate());
+		holder.tvDate.setText(subtitle);
 		holder.tvComment.setText(event.getComment());
 	}
 

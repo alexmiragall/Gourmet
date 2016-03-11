@@ -72,7 +72,13 @@
 						android:title=""
 						app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
 						app:titleMarginTop="13dp"
-						/>
+				>
+					<ImageView android:layout_width="100dp"
+							   android:layout_height="60dp"
+							   android:layout_marginLeft="@dimen/activity_horizontal_margin"
+							   android:src="@drawable/gourmet_menu"
+							   android:scaleType="fitCenter"/>
+				</android.support.v7.widget.Toolbar>
 
 				<android.support.design.widget.TabLayout
 						android:id="@+id/tabs"
@@ -81,6 +87,7 @@
 						android:layout_gravity="bottom"
 						app:tabIndicatorColor="@android:color/white"
 						android:layout_marginRight="100dp"/>
+
 
 			</android.support.design.widget.CollapsingToolbarLayout>
 
