@@ -3,7 +3,9 @@ package com.tuenti.gourmet;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.CoordinatorLayout;
@@ -18,6 +20,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.google.android.gms.auth.api.Auth;
@@ -64,6 +68,11 @@ public class MainActivity extends AppCompatActivity {
 		@Override
 		public void run() {
 			hideSplash();
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+				Window window = getWindow();
+				window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+				window.setStatusBarColor(Color.TRANSPARENT);
+			}
 		}
 	};
 	Handler handler = new Handler();
@@ -175,6 +184,13 @@ public class MainActivity extends AppCompatActivity {
 //		splashTitle.setTypeface();
 		splash.setVisibility(View.VISIBLE);
 		mainContent.setVisibility(View.GONE);
+
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			Window window = getWindow();
+			window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+			window.setStatusBarColor(Color.BLACK);
+		}
 	}
 
 	/**
