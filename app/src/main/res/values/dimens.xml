@@ -7,6 +7,8 @@
 	<dimen name="app_bar_height">180dp</dimen>
 	<dimen name="text_margin">16dp</dimen>
 	<!-- dimensions -->
+	<dimen name="max_height_main_action_bar">256dp</dimen>
+	<dimen name="min_height_main_action_bar">104dp</dimen>
 	<dimen name="image_width">120dp</dimen>
 	<dimen name="image_final_width">32dp</dimen>
 	<dimen name="spacing_normal">16dp</dimen>
