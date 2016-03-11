@@ -58,9 +58,6 @@ public class MainActivity extends AppCompatActivity {
 	@Bind(R.id.splash)
 	View splash;
 
-	@Bind(R.id.splash_title)
-	TextView splashTitle;
-
 	private GoogleApiClient googleApiClient;
 
 	@Override

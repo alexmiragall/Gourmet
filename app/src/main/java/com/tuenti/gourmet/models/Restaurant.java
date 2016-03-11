@@ -99,5 +99,36 @@ public class Restaurant implements Parcelable {
 		return description;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
 
+		Restaurant that = (Restaurant) o;
+
+		if (PARCELABLE_RESTAURANT != that.PARCELABLE_RESTAURANT) return false;
+		if (Double.compare(that.lat, lat) != 0) return false;
+		if (Double.compare(that.lon, lon) != 0) return false;
+		if (name != null ? !name.equals(that.name) : that.name != null) return false;
+		if (address != null ? !address.equals(that.address) : that.address != null) return false;
+		if (photo != null ? !photo.equals(that.photo) : that.photo != null) return false;
+		return !(description != null ? !description.equals(that.description) : that.description != null);
+
+	}
+
+	@Override
+	public int hashCode() {
+		int result;
+		long temp;
+		result = PARCELABLE_RESTAURANT;
+		result = 31 * result + (name != null ? name.hashCode() : 0);
+		result = 31 * result + (address != null ? address.hashCode() : 0);
+		temp = Double.doubleToLongBits(lat);
+		result = 31 * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(lon);
+		result = 31 * result + (int) (temp ^ (temp >>> 32));
+		result = 31 * result + (photo != null ? photo.hashCode() : 0);
+		result = 31 * result + (description != null ? description.hashCode() : 0);
+		return result;
+	}
 }
