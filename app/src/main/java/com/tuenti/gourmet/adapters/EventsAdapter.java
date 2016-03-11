@@ -47,7 +47,9 @@ public class EventsAdapter extends RecyclerView.Adapter<EventViewHolder> {
 	public void onBindViewHolder(EventViewHolder holder, int position) {
 		Event event = events.get(position);
 		if (!TextUtils.isEmpty(event.getRestaurant().getPhoto())) {
-			Picasso.with(context).load(event.getRestaurant().getPhoto()).into(holder.imageView);
+			Picasso.with(context).load(event.getRestaurant().getPhoto()).error(R.drawable.gray_background)
+					.placeholder(R.drawable.gray_background).into
+					(holder.imageView);
 		}
 		holder.tvTitle.setText(event.getRestaurant().getName());
 		holder.tvDate.setText(SimpleDateFormat.getDateInstance().format(event.getDate()));
