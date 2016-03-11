@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
 	private void handleSignInResult(GoogleSignInResult result) {
 		if (result.isSuccess()) {
 			// Signed in successfully, show authenticated UI.
-			handler.postDelayed(hideSplash, 3000);x
+			handler.postDelayed(hideSplash, 3000);
 			GoogleSignInAccount signInAccount = result.getSignInAccount();
 			Uri photoUrl = signInAccount.getPhotoUrl();
 			UserRepository.getInstance().setCurrentUser(
