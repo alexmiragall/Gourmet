@@ -97,6 +97,6 @@
 	<string name="view">View</string>
 	<string name="view_details">View details</string>
 	<string name="subscribe">Subscribe to this restaurant</string>
-	<string name="events">EVENTS</string>
-	<string name="subscriptions">SUBSCRIPTIONS</string>
+	<string name="events">EVENTOS</string>
+	<string name="subscriptions">SUSCRIPCIONES</string>
 </resources>
