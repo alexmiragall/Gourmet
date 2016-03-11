@@ -1,56 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<RelativeLayout
 		xmlns:android="http://schemas.android.com/apk/res/android"
-		xmlns:card_view="http://schemas.android.com/apk/res-auto"
-		android:id="@+id/card_view"
-		android:layout_gravity="center"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
 		android:layout_width="match_parent"
-		android:layout_height="200dp"
-		card_view:cardCornerRadius="4dp"
-		android:layout_margin="@dimen/activity_horizontal_margin"
-		>
-	<RelativeLayout
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:layout_margin="@dimen/activity_horizontal_margin">
+		android:layout_height="wrap_content"
+		android:layout_margin="@dimen/activity_horizontal_margin">
 
-		<ImageView android:id="@+id/image"
-				   android:layout_width="80dp"
-				   android:layout_height="80dp"
-				   android:src="@drawable/common_ic_googleplayservices"
-				   android:layout_marginRight="10dp"
-				   android:layout_marginBottom="10dp"
-				   android:scaleType="centerCrop"
-				/>
+	<de.hdodenhof.circleimageview.CircleImageView
+			android:id="@+id/image"
+			android:layout_width="80dp"
+			android:layout_height="80dp"
+			android:layout_gravity="center"
+			android:layout_marginRight="10dp"
+			android:layout_marginBottom="10dp"
+			android:scaleType="centerCrop"
+			app:border_color="@android:color/white"
+			app:border_width="2dp"
+			/>
+	<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:layout_toRightOf="@id/image"
+			android:layout_alignTop="@id/image"
+			android:layout_alignBottom="@id/image">
 
 		<TextView
 				android:id="@+id/title"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_toRightOf="@id/image"
-				android:textAppearance="?android:attr/textAppearanceLarge"
+				android:textSize="18dp"
+				android:gravity="center_vertical"
 				android:maxLines="1"
 				android:layout_marginBottom="4dp"
 				/>
-
-		<TextView
-				android:id="@+id/date"
-				android:layout_width="match_parent"
+		<CheckBox
+				android:id="@+id/subscribe"
+				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_toRightOf="@id/image"
-				android:textAppearance="?android:attr/textAppearanceSmall"
-				android:layout_below="@id/title"
-				android:layout_alignBaseline="@id/image"
-				android:maxLines="1"
-				/>
 
-		<TextView
-				android:id="@+id/comment"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:textAppearance="?android:attr/textAppearanceMedium"
-				android:layout_below="@id/image"
-				/>
+				android:text="@string/subscribe"
+				android:layout_alignParentBottom="true"/>
 
-	</RelativeLayout>
-</android.support.v7.widget.CardView>
+
+	</LinearLayout>
+
+
+</RelativeLayout>

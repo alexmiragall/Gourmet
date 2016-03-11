@@ -29,6 +29,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.common.api.ResultCallback;
 import com.tuenti.gourmet.models.User;
+import com.tuenti.gourmet.repositories.RestaurantRepository;
 import com.tuenti.gourmet.repositories.UserRepository;
 import com.tuenti.gourmet.startEvent.RestaurantsMapActivity;
 
@@ -158,6 +159,8 @@ public class MainActivity extends AppCompatActivity {
 			Uri photoUrl = signInAccount.getPhotoUrl();
 			UserRepository.getInstance().setCurrentUser(
 					new User(signInAccount.getDisplayName(), photoUrl != null ? photoUrl.toString() : null));
+
+			RestaurantRepository.getInstance();
 		} else {
 			finish();
 		}
