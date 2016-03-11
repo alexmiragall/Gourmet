@@ -24,10 +24,7 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Picasso.LoadedFrom;
 import com.squareup.picasso.Target;
 import com.tuenti.gourmet.R;
-import com.tuenti.gourmet.models.Event;
 import com.tuenti.gourmet.models.Restaurant;
-import com.tuenti.gourmet.models.User;
-import com.tuenti.gourmet.repositories.EventRepository;
 
 public class RestaurantActivity extends AppCompatActivity {
 
@@ -72,14 +69,9 @@ public class RestaurantActivity extends AppCompatActivity {
 		floatingActionButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				User owner = new User("José Miguel Brocal", "http://www.google.es");
-				Event event = new Event(restaurant, 0L, owner, "Esto es un comentario");
-
-				EventRepository.getInstance().post(event);
+				NewEventDialogFragment.show(RestaurantActivity.this, restaurant, floatingActionButton.getSolidColor());
 			}
 		});
-
-
 	}
 
 	private void setImage(String photo) {

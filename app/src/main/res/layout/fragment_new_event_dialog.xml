@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  xmlns:tools="http://schemas.android.com/tools"
+			  android:layout_width="match_parent"
+			  android:layout_height="match_parent"
+			  android:orientation="vertical"
+			  tools:context="com.tuenti.gourmet.startEvent.NewEventDialogFragment"
+			  android:padding="20dp">
+
+	<TextView android:layout_width="match_parent"
+			  android:layout_height="wrap_content"
+			  android:id="@+id/event_dialog_title"
+			  android:textSize="20dp"
+			  android:textStyle="bold"/>
+
+	<TimePicker android:layout_marginTop="10dp"
+				android:id="@+id/event_date_editText"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"/>
+
+	<android.support.design.widget.TextInputLayout
+			android:id="@+id/eventCommentExtInputLayout"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+		<EditText
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/eventComment"
+				android:hint="Add a comment..."
+				android:layout_marginTop="40dp"/>
+	</android.support.design.widget.TextInputLayout>
+
+	<Button android:id="@+id/create_event_btn"
+			android:layout_width="match_parent"
+			android:layout_height="60dp"
+			android:text="Crear evento"/>
+
+</LinearLayout>

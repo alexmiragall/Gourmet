@@ -19,6 +19,7 @@ public abstract class Repository<T> {
 
 	public Repository(String firebaseUrl, final Class<T> modelClass) {
 		firebase = new Firebase(firebaseUrl);
+
 		firebase.addValueEventListener(new ValueEventListener() {
 			@Override
 			public void onDataChange(DataSnapshot snapshot) {
