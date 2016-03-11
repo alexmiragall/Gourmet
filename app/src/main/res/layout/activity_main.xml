@@ -9,7 +9,7 @@
 			android:id="@+id/splash"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			android:background="@android:color/black">
+			android:background="#FFFFFFFF">
 		<ImageView android:layout_width="match_parent"
 				   android:layout_height="match_parent"
 				   android:scaleType="centerCrop"
@@ -73,7 +73,7 @@
 						android:title=""
 						app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
 						app:titleMarginTop="13dp"
-				/>
+						/>
 
 				<android.support.design.widget.TabLayout
 						android:id="@+id/tabs"
@@ -127,6 +127,6 @@
 				android:textColor="@android:color/white"
 				app:behavior_overlapTop="64dp"
 				app:layout_behavior="com.tuenti.gourmet.TitleBehavior"
-		/>
+				/>
 	</android.support.design.widget.CoordinatorLayout>
 </FrameLayout>

@@ -196,6 +196,7 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	private void showSplash() {
+//		splashTitle.setTypeface();
 		splash.setVisibility(View.VISIBLE);
 		mainContent.setVisibility(View.GONE);
 	}
