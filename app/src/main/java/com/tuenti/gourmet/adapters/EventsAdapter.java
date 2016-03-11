@@ -9,12 +9,13 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.tuenti.gourmet.R;
 import com.tuenti.gourmet.models.Event;
-import com.tuenti.gourmet.repositories.EventRepository;
 
 /**
  * Copyright (c) Tuenti Technologies. All rights reserved.
@@ -44,7 +45,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventViewHolder> {
 	}
 
 	@Override
-	public void onBindViewHolder(EventViewHolder holder, int position) {
+	public void onBindViewHolder(final EventViewHolder holder, int position) {
 		Event event = events.get(position);
 		if (!TextUtils.isEmpty(event.getRestaurant().getPhoto())) {
 			Picasso.with(context).load(event.getRestaurant().getPhoto()).error(R.drawable.gray_background)
@@ -56,6 +57,13 @@ public class EventsAdapter extends RecyclerView.Adapter<EventViewHolder> {
 		SimpleDateFormat.getDateInstance().format(event.getDate());
 		holder.tvDate.setText(subtitle);
 		holder.tvComment.setText(event.getComment());
+
+		holder.buttonJoin.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Toast.makeText(holder.buttonJoin.getContext(), R.string.que_aproveche, Toast.LENGTH_LONG).show();
+			}
+		});
 	}
 
 	@Override
