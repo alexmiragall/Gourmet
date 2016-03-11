@@ -17,6 +17,9 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,6 +28,7 @@ import com.squareup.picasso.Picasso.LoadedFrom;
 import com.squareup.picasso.Target;
 import com.tuenti.gourmet.R;
 import com.tuenti.gourmet.models.Restaurant;
+import com.tuenti.gourmet.repositories.SubscriptionRepository;
 
 public class RestaurantActivity extends AppCompatActivity {
 
@@ -35,6 +39,12 @@ public class RestaurantActivity extends AppCompatActivity {
 
 	@Bind(R.id.description)
 	TextView description;
+
+	@Bind(R.id.address)
+	TextView address;
+
+	@Bind(R.id.subscribe)
+	CheckBox subscribe;
 
 	@Bind(R.id.fab)
 	FloatingActionButton floatingActionButton;
@@ -59,6 +69,12 @@ public class RestaurantActivity extends AppCompatActivity {
 		restaurant = intent.getParcelableExtra(PARCELABLE_KEY);
 
 
+		fillData(restaurant);
+
+	}
+
+	private void fillData(final Restaurant restaurant) {
+
 		if (!TextUtils.isEmpty(restaurant.getPhoto())) {
 			setImage(restaurant.getPhoto());
 
@@ -70,6 +86,25 @@ public class RestaurantActivity extends AppCompatActivity {
 			@Override
 			public void onClick(View view) {
 				NewEventDialogFragment.show(RestaurantActivity.this, restaurant, floatingActionButton.getSolidColor());
+			}
+		});
+
+		description.setText(restaurant.getDescription());
+		address.setText(restaurant.getAddress());
+
+		SubscriptionRepository.getInstance().initialize(this); //TODO REMOVE
+		boolean subscribed = SubscriptionRepository.getInstance().isSubscribedTo(restaurant.getName());
+
+		subscribe.setChecked(subscribed);
+
+		subscribe.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if (isChecked) {
+					SubscriptionRepository.getInstance().post(restaurant.getName());
+				} else {
+					SubscriptionRepository.getInstance().remove(restaurant.getName());
+				}
 			}
 		});
 	}
@@ -95,6 +130,10 @@ public class RestaurantActivity extends AppCompatActivity {
 					window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 					window.setStatusBarColor(darkMutedColor);
 				}
+
+				subscribe.setHighlightColor(vibrant);
+				subscribe.setDrawingCacheBackgroundColor(vibrant);
+				subscribe.setHintTextColor(vibrant);
 
 			}
 

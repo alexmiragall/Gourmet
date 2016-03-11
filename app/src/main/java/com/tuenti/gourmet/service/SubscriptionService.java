@@ -29,7 +29,6 @@ public class SubscriptionService extends Service implements Repository.Callback<
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		EventRepository.getInstance().subscribe(this);
-
 		SubscriptionRepository.getInstance().initialize(this);
 
 		return START_STICKY;

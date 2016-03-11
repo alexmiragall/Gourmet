@@ -7,7 +7,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatDialogFragment;
@@ -17,6 +16,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -47,8 +47,9 @@ public class NewEventDialogFragment extends AppCompatDialogFragment {
 	@Bind(R.id.eventComment)
 	EditText eventCommentEditText;
 
-	@Bind(R.id.eventCommentExtInputLayout)
-	TextInputLayout commentTextInputLayout;
+	@Bind(R.id.mainLayout)
+	LinearLayout mainLayout;
+
 
 	private Restaurant restaurant;
 	private int mainColor;
@@ -85,6 +86,12 @@ public class NewEventDialogFragment extends AppCompatDialogFragment {
 		setUpView();
 
 		return v;
+	}
+
+	@Override
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		mainLayout.requestFocus();
 	}
 
 	private void setUpView() {

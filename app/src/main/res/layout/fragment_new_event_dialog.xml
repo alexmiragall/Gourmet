@@ -4,7 +4,10 @@
 			  android:layout_height="match_parent"
 			  android:orientation="vertical"
 			  tools:context="com.tuenti.gourmet.startEvent.NewEventDialogFragment"
-			  android:padding="20dp">
+			  android:padding="20dp"
+			  android:descendantFocusability="beforeDescendants"
+			  android:focusableInTouchMode="true"
+			  android:id="@+id/mainLayout">
 
 	<TextView android:layout_width="match_parent"
 			  android:layout_height="wrap_content"
@@ -33,6 +36,6 @@
 	<Button android:id="@+id/create_event_btn"
 			android:layout_width="match_parent"
 			android:layout_height="60dp"
-			android:text="Crear evento"/>
+			android:text="Create event!"/>
 
 </LinearLayout>
