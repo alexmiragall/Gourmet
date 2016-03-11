@@ -114,19 +114,5 @@
 						app:border_width="2dp"
 						app:layout_behavior="com.tuenti.gourmet.AvatarImageBehavior"
 				/> -->
-		<TextView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:gravity="left|top"
-				android:text="@string/app_name"
-				android:transformPivotX="0dp"
-				android:transformPivotY="0dp"
-				android:textSize="50dp"
-				android:layout_marginTop="15dp"
-				android:layout_marginLeft="16dp"
-				android:textColor="@android:color/white"
-				app:behavior_overlapTop="64dp"
-				app:layout_behavior="com.tuenti.gourmet.TitleBehavior"
-				/>
 	</android.support.design.widget.CoordinatorLayout>
 </FrameLayout>
