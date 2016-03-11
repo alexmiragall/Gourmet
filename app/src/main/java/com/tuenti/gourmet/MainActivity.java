@@ -33,8 +33,6 @@ import com.tuenti.gourmet.models.User;
 import com.tuenti.gourmet.repositories.UserRepository;
 import com.tuenti.gourmet.startEvent.RestaurantsMapActivity;
 
-import org.w3c.dom.Text;
-
 public class MainActivity extends AppCompatActivity {
 
 	private static final int RESULT_CODE_SIGN_IN = 1;
@@ -59,9 +57,6 @@ public class MainActivity extends AppCompatActivity {
 
 	@Bind(R.id.splash)
 	View splash;
-
-	@Bind(R.id.splash_title)
-	TextView splashTitle;
 
 	private GoogleApiClient googleApiClient;
 
@@ -249,8 +244,10 @@ public class MainActivity extends AppCompatActivity {
 				case 0:
 					fragment = new EventsFragment();
 					break;
+				case 1:
+					fragment = new SubscriptionsFragment();
 				default:
-					fragment = PlaceholderFragment.newInstance(position + 1);
+//					fragment = new SubscriptionsFragment();
 					break;
 			}
 
@@ -260,18 +257,16 @@ public class MainActivity extends AppCompatActivity {
 		@Override
 		public int getCount() {
 			// Show 3 total pages.
-			return 3;
+			return 2;
 		}
 
 		@Override
 		public CharSequence getPageTitle(int position) {
 			switch (position) {
 				case 0:
-					return "Events";
+					return getString(R.string.events);
 				case 1:
-					return "SECTION 2";
-				case 2:
-					return "SECTION 3";
+					return getString(R.string.subscriptions);
 			}
 			return null;
 		}

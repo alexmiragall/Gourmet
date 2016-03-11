@@ -46,4 +46,15 @@ public class SubscriptionRepository {
 	public boolean isSubscribedTo(String restaurantName) {
 		return subscriptions.contains(restaurantName);
 	}
+
+	public Set<String> getSubscriptions() {
+		return new HashSet<>(subscriptions);
+	}
+
+	public void reset() {
+		subscriptions.clear();
+		preferences.edit()
+				.putStringSet(SUBSCRIPTIONS_ARRAY_PREFERENCE, subscriptions)
+				.apply();
+	}
 }
