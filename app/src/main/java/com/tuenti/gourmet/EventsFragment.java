@@ -1,6 +1,5 @@
 package com.tuenti.gourmet;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -42,6 +41,18 @@ public class EventsFragment extends Fragment implements EventListPresenter.View 
 		super.onActivityCreated(savedInstanceState);
 		presenter = new EventListPresenter();
 		presenter.init(this);
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		presenter.onResume();
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		presenter.onPause();
 	}
 
 	@Override

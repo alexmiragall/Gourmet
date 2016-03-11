@@ -1,12 +1,17 @@
 package com.tuenti.gourmet.startEvent;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
+import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -20,12 +25,14 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.tuenti.gourmet.R;
 import com.tuenti.gourmet.models.Restaurant;
-import com.tuenti.gourmet.repositories.RestaurantRepository;
-import com.tuenti.gourmet.startEvent.Domain.RestaurantParcelable;
+import com.tuenti.gourmet.repositories.Repository;
 import com.tuenti.gourmet.startEvent.Presenter.RestaurantPresenter;
 
-public class RestaurantsMapActivity extends FragmentActivity implements OnMapReadyCallback, RestaurantRepository
-		.GetRestaurantCallback, OnMarkerClickListener {
+public class RestaurantsMapActivity extends FragmentActivity implements OnMapReadyCallback,
+		Repository.Callback<Restaurant>, OnMarkerClickListener {
+
+	@Bind(R.id.main_content)
+	CoordinatorLayout coordinatorLayout;
 
 	private GoogleMap map;
 
@@ -38,6 +45,7 @@ public class RestaurantsMapActivity extends FragmentActivity implements OnMapRea
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_restaurants_map);
+		ButterKnife.bind(this);
 		// Obtain the SupportMapFragment and get notified when the map is ready to be used.
 		SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.map);
@@ -82,6 +90,7 @@ public class RestaurantsMapActivity extends FragmentActivity implements OnMapRea
 	@Override
 	public void onDataChange(List<Restaurant> restaurants) {
 		map.clear();
+		addTuentiMarker();
 		for(Restaurant restaurant : restaurants) {
 			Marker marker = createMarkerForRestaurant(restaurant);
 			markerToRestaurant.put(marker, restaurant);
@@ -102,15 +111,25 @@ public class RestaurantsMapActivity extends FragmentActivity implements OnMapRea
 		Restaurant restaurant = markerToRestaurant.get(marker);
 
 		if (restaurant != null) {
+			showRestaurantDialog(restaurant);
 
-			RestaurantParcelable restaurantParcelable = new RestaurantParcelable(restaurant);
-
-			ViewRestaurantDialogFragment viewRestaurantDialogFragment = ViewRestaurantDialogFragment.newInstance(restaurantParcelable);
-			viewRestaurantDialogFragment.show(getSupportFragmentManager(), "ViewRestaurantDialogFragment");
-
-			return true;
 		}
 		return false;
+	}
+
+	public void showRestaurantDialog(final Restaurant restaurant) {
+		Snackbar snackbar = Snackbar
+				.make(coordinatorLayout, restaurant.getName(), Snackbar.LENGTH_LONG)
+				.setAction(getString(R.string.view), new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						Intent intent = new Intent(RestaurantsMapActivity.this, RestaurantActivity.class);
+						intent.putExtra(RestaurantActivity.PARCELABLE_KEY, restaurant);
+						startActivity(intent);
+					}
+				});
+
+		snackbar.show();
 	}
 
 }

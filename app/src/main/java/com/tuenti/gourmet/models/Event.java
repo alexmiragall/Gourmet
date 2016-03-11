@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Event {
 	private Restaurant restaurant;
-	private Date date;
+	private Long date;
 	private User owner;
 	private String comment;
 	private List<User> occupants;
@@ -17,7 +17,7 @@ public class Event {
 	public Event() {
 	}
 
-	public Event(Restaurant restaurant, Date date, User owner, String comment) {
+	public Event(Restaurant restaurant, Long date, User owner, String comment) {
 		this.restaurant = restaurant;
 		this.date = date;
 		this.owner = owner;
@@ -32,7 +32,7 @@ public class Event {
 		return restaurant;
 	}
 
-	public Date getDate() {
+	public Long getDate() {
 		return date;
 	}
 
