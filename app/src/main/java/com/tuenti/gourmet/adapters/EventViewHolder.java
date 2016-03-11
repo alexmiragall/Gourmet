@@ -4,6 +4,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,6 +22,8 @@ public class EventViewHolder extends RecyclerView.ViewHolder {
 	TextView tvDate;
 	@Bind(R.id.comment)
 	TextView tvComment;
+	@Bind(R.id.btnJoin)
+	Button buttonJoin;
 
 	public EventViewHolder(View itemView) {
 		super(itemView);

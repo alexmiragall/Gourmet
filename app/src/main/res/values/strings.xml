@@ -94,9 +94,10 @@
 		"For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
 		"when a user tries to pick up one of cards.\n\n"
 	</string>
-	<string name="view">View</string>
-	<string name="view_details">View details</string>
-	<string name="subscribe">Subscribe to this restaurant</string>
-	<string name="events">EVENTS</string>
-	<string name="subscriptions">SUBSCRIPTIONS</string>
+	<string name="view">Ver</string>
+	<string name="view_details">Ver detalles</string>
+	<string name="subscribe">Suscribirse</string>
+	<string name="events">EVENTOS</string>
+	<string name="subscriptions">SUSCRIPCIONES</string>
+	<string name="que_aproveche">¡Que aproveche!</string>
 </resources>

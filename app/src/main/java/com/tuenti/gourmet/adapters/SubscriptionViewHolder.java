@@ -4,6 +4,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,10 +18,9 @@ public class SubscriptionViewHolder extends RecyclerView.ViewHolder {
 	ImageView imageView;
 	@Bind(R.id.title)
 	TextView tvTitle;
-	@Bind(R.id.date)
-	TextView tvDate;
-	@Bind(R.id.comment)
-	TextView tvComment;
+	@Bind(R.id.subscribe)
+	CheckBox subscribe;
+
 
 	public SubscriptionViewHolder(View itemView) {
 		super(itemView);

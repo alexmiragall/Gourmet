@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.tuenti.gourmet.adapters.EventsAdapter;
+import com.tuenti.gourmet.adapters.SimpleDividerItemDecoration;
 import com.tuenti.gourmet.models.Event;
 import com.tuenti.gourmet.repositories.EventListPresenter;
 
@@ -59,6 +60,7 @@ public class EventsFragment extends Fragment implements EventListPresenter.View 
 	public void onEventsChanged(List<Event> events) {
 		if (eventsAdapter == null)  {
 			eventsAdapter = new EventsAdapter(getActivity(), events);
+			recyclerView.addItemDecoration(new SimpleDividerItemDecoration(getActivity()));
 			recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 			recyclerView.setAdapter(eventsAdapter);
 		} else {
