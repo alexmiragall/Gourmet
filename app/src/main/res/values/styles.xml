@@ -8,6 +8,9 @@
 		<item name="colorAccent">@color/colorAccent</item>
 		<item name="android:textColorPrimary">#001628</item>
 
+		<item name="colorControlHighlight">@color/colorAccent</item>
+		<item name="colorButtonNormal">@color/colorAccent</item>
+
 	</style>
 	<style name="AppTheme.NoActionBar">
 		<item name="windowActionBar">false</item>
