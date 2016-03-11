@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			  xmlns:tools="http://schemas.android.com/tools"
 			  android:layout_width="match_parent"
-			  android:layout_height="match_parent"
+			  android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
 			  android:orientation="vertical"
 			  tools:context="com.tuenti.gourmet.startEvent.NewEventDialogFragment"
 			  android:padding="20dp"
@@ -31,11 +31,12 @@
 				android:id="@+id/eventComment"
 				android:hint="Add a comment..."
 				android:layout_marginTop="40dp"/>
+
 	</android.support.design.widget.TextInputLayout>
 
-	<Button android:id="@+id/create_event_btn"
+	<!--Button android:id="@+id/create_event_btn"
 			android:layout_width="match_parent"
 			android:layout_height="60dp"
-			android:text="Create event!"/>
+			android:text="Create event!"/ -->
 
 </LinearLayout>

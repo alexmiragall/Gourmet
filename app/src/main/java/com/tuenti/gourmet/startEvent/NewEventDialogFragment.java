@@ -5,7 +5,9 @@ import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
@@ -37,9 +39,6 @@ public class NewEventDialogFragment extends AppCompatDialogFragment {
 
 	@Bind(R.id.event_dialog_title)
 	TextView dialogTitle;
-
-	@Bind(R.id.create_event_btn)
-	Button createEventBtn;
 
 	@Bind(R.id.event_date_editText)
 	TimePicker eventDateEditText;
@@ -73,36 +72,28 @@ public class NewEventDialogFragment extends AppCompatDialogFragment {
 
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		return new Dialog(getContext(), android.R.style.Theme_Material_Light_Dialog_Alert);
-	}
-
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		loadRestaurantFromArguments();
-
-		View v = inflater.inflate(R.layout.fragment_new_event_dialog, container, false);
+		View v = LayoutInflater.from(getContext()).inflate(R.layout.fragment_new_event_dialog, null);
 		ButterKnife.bind(this, v);
+		AlertDialog dialog = new AlertDialog.Builder(getContext())
+				.setView(v)
+				.setPositiveButton("Create it!", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						postNewEvent();
+					}
+				})
+				.create();
 
+		loadRestaurantFromArguments();
 		setUpView();
-
-		return v;
-	}
-
-	@Override
-	public void onViewCreated(View view, Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
 		mainLayout.requestFocus();
+
+		return dialog;
 	}
 
 	private void setUpView() {
 		dialogTitle.setText("Create an event for " + restaurant.getName());
 		eventDateEditText.setBackgroundColor(mainColor);
-		createEventBtn.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				postNewEvent();
-			}
-		});
 	}
 
 	private void postNewEvent() {
@@ -120,8 +111,6 @@ public class NewEventDialogFragment extends AppCompatDialogFragment {
 		EventRepository.getInstance().post(newEvent, new PostCallback() {
 			@Override
 			public void onItemPosted() {
-				Toast.makeText(NewEventDialogFragment.this.getContext(), "You event has been created!", Toast
-						.LENGTH_LONG).show();
 				NewEventDialogFragment.this.dismiss();
 			}
 		});
