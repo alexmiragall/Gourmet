@@ -24,6 +24,7 @@ import com.tuenti.gourmet.repositories.EventRepository;
 import com.tuenti.gourmet.repositories.Repository;
 import com.tuenti.gourmet.repositories.SubscriptionRepository;
 import com.tuenti.gourmet.repositories.UserRepository;
+import com.tuenti.gourmet.startEvent.RestaurantActivity;
 
 public class SubscriptionService extends Service implements Repository.Callback<Event> {
 
@@ -73,11 +74,11 @@ public class SubscriptionService extends Service implements Repository.Callback<
 								} catch (IOException e) {}
 							}
 
-						Intent startMainActivity = new Intent(SubscriptionService.this, MainActivity.class);
-						startMainActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						Intent intent = new Intent(SubscriptionService.this, RestaurantActivity.class);
+						intent.putExtra(RestaurantActivity.PARCELABLE_KEY, event.getRestaurant());
 
 						PendingIntent pendingIntent = PendingIntent
-								.getActivity(SubscriptionService.this, 0, startMainActivity, 0);
+								.getActivity(SubscriptionService.this, 0, intent, 0);
 						notificationBuilder.setContentIntent(pendingIntent);
 						notificationBuilder.setAutoCancel(true);
 
