@@ -94,5 +94,14 @@
 				android:layout_margin="@dimen/fab_margin"
 				android:src="@android:drawable/ic_dialog_email"/>
 
+		<de.hdodenhof.circleimageview.CircleImageView
+				android:layout_width="@dimen/image_width"
+				android:layout_height="@dimen/image_width"
+				android:layout_gravity="center"
+				android:src="@drawable/common_google_signin_btn_icon_light_normal"
+				app:border_color="@android:color/white"
+				app:border_width="2dp"
+				app:layout_behavior="com.tuenti.gourmet.AvatarImageBehavior"
+		/>
 	</android.support.design.widget.CoordinatorLayout>
 </FrameLayout>
