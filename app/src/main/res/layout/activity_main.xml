@@ -75,9 +75,13 @@
 				>
 					<ImageView android:layout_width="100dp"
 							   android:layout_height="60dp"
+							   android:transformPivotY="0dp"
+							   android:transformPivotX="0dp"
 							   android:layout_marginLeft="@dimen/activity_horizontal_margin"
 							   android:src="@drawable/gourmet_menu"
 							   android:scaleType="fitCenter"/>
+
+
 				</android.support.v7.widget.Toolbar>
 
 				<android.support.design.widget.TabLayout
@@ -111,14 +115,14 @@
 				android:src="@mipmap/ic_add_icon"
 				app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-		<!--		<de.hdodenhof.circleimageview.CircleImageView
-						android:layout_width="@dimen/image_width"
-						android:layout_height="@dimen/image_width"
-						android:layout_gravity="center"
-						android:src="@drawable/common_google_signin_btn_icon_light_normal"
-						app:border_color="@android:color/white"
-						app:border_width="2dp"
-						app:layout_behavior="com.tuenti.gourmet.AvatarImageBehavior"
-				/> -->
+		<ImageView
+				android:layout_width="0dp"
+				android:layout_height="0dp"
+				android:src="@drawable/gourmet_logo"
+				android:layout_gravity="center_horizontal"
+				android:scaleType="fitCenter"
+				android:visibility="invisible"
+				android:layout_marginTop="?attr/actionBarSize"
+				app:layout_behavior="com.tuenti.gourmet.TitleBehavior"/>
 	</android.support.design.widget.CoordinatorLayout>
 </FrameLayout>

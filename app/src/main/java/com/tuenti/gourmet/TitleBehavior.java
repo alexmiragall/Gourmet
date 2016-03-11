@@ -15,7 +15,7 @@ import android.widget.TextView;
  * Copyright (c) Tuenti Technologies. All rights reserved.
  */
 @SuppressWarnings("unused")
-public class TitleBehavior extends CoordinatorLayout.	Behavior<TextView> {
+public class TitleBehavior extends CoordinatorLayout.Behavior<View> {
 
 	private final static float MIN_AVATAR_PERCENTAGE_SIZE   = 0.3f;
 
@@ -28,22 +28,23 @@ public class TitleBehavior extends CoordinatorLayout.	Behavior<TextView> {
 	}
 
 	@Override
-	public boolean layoutDependsOn(CoordinatorLayout parent, TextView child, View dependency) {
+	public boolean layoutDependsOn(CoordinatorLayout parent, View child, View dependency) {
 		return dependency instanceof AppBarLayout;
 	}
 
 	@Override
-	public boolean onDependentViewChanged(CoordinatorLayout parent, TextView child, View dependency) {
+	public boolean onDependentViewChanged(CoordinatorLayout parent, View child, View dependency) {
 		final int maxScrollDistance =  mContext.getResources().getDimensionPixelSize(R.dimen.max_height_main_action_bar) -  mContext
 				.getResources().getDimensionPixelSize(R.dimen.min_height_main_action_bar);
 		View toolbar = getToolbar((ViewGroup) dependency);
-		View view = ((ViewGroup)((ViewGroup) dependency).getChildAt(0)).getChildAt(2);
+		View view = ((ViewGroup)((ViewGroup) dependency).getChildAt(0)).getChildAt(3);
+		View viewTarget = ((ViewGroup)((ViewGroup)((ViewGroup) dependency).getChildAt(0)).getChildAt(2)).getChildAt(0);
 		float expandedPercentageFactor = getY(view) / (float)
 				maxScrollDistance;
 		Log.d("sadsadasdasd", "expandedPercentageFactor: " + expandedPercentageFactor + "\n");
 		Log.d("sadsadasdasd", "getY(view): " + getY(view));
-		child.setScaleX(0.3f + expandedPercentageFactor);
-		child.setScaleY(0.3f + expandedPercentageFactor);
+		viewTarget.setScaleX(0.3f + expandedPercentageFactor);
+		viewTarget.setScaleY(0.3f + expandedPercentageFactor);
 
 		return true;
 	}
